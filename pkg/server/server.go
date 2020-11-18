@@ -136,22 +136,22 @@ func (api *APIServer) setupAPIServer(cfg *config.Config) *http.Server {
 
 	r.HandleFunc("/backup/tables", api.httpTablesHandler).Methods("GET")
 	r.HandleFunc("/backup/list", api.httpListHandler).Methods("GET")
-	r.HandleFunc("/backup/create", api.httpCreateHandler).Methods("POST")
-	r.HandleFunc("/backup/clean", api.httpCleanHandler).Methods("POST")
-	r.HandleFunc("/backup/freeze", api.httpFreezeHandler).Methods("POST")
-	r.HandleFunc("/backup/upload/{name}", api.httpUploadHandler).Methods("POST")
-	r.HandleFunc("/backup/download/{name}", api.httpDownloadHandler).Methods("POST")
-	r.HandleFunc("/backup/restore/{name}", api.httpRestoreHandler).Methods("POST")
-	r.HandleFunc("/backup/delete/{where}/{name}", api.httpDeleteHandler).Methods("POST")
+	r.HandleFunc("/backup/create", api.httpCreateHandler).Methods("POST", "GET")
+	r.HandleFunc("/backup/clean", api.httpCleanHandler).Methods("POST", "GET")
+	r.HandleFunc("/backup/freeze", api.httpFreezeHandler).Methods("POST", "GET")
+	r.HandleFunc("/backup/upload/{name}", api.httpUploadHandler).Methods("POST", "GET")
+	r.HandleFunc("/backup/download/{name}", api.httpDownloadHandler).Methods("POST", "GET")
+	r.HandleFunc("/backup/restore/{name}", api.httpRestoreHandler).Methods("POST", "GET")
+	r.HandleFunc("/backup/delete/{where}/{name}", api.httpDeleteHandler).Methods("POST", "GET")
 	r.HandleFunc("/backup/config/default", httpConfigDefaultHandler).Methods("GET")
 	r.HandleFunc("/backup/config", api.httpConfigHandler).Methods("GET")
-	r.HandleFunc("/backup/config", api.httpConfigUpdateHandler).Methods("POST")
+	r.HandleFunc("/backup/config", api.httpConfigUpdateHandler).Methods("POST", "GET")
 	r.HandleFunc("/backup/status", api.httpBackupStatusHandler).Methods("GET")
 
 	r.HandleFunc("/integration/actions", api.integrationBackupLog).Methods("GET")
 	r.HandleFunc("/integration/list", api.httpListHandler).Methods("GET")
 
-	r.HandleFunc("/integration/actions", api.integrationPost).Methods("POST")
+	r.HandleFunc("/integration/actions", api.integrationPost).Methods("POST", "GET")
 
 	var routes []string
 	r.Walk(func(route *mux.Route, router *mux.Router, ancestors []*mux.Route) error {
