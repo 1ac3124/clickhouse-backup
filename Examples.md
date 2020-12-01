@@ -1,6 +1,6 @@
 # Use cases of clickhouse-backup
 
-## How to convert MergeTree to ReplicatedMegreTree
+## How to convert MergeTree to ReplicatedMergeTree
 1. Create backup
    ```
    clickhouse-backup create --table='my_db.my_table' my_backup
